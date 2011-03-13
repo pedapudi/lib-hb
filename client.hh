@@ -9,10 +9,13 @@ class HBClient {
 public:
     HBClient();
     HBClient(string hip, int cport);
+    string server() const;
+    string cname() const;
+    int cport() const;
+    string cip() const;
+protected:
+    Socket sock;
+    string hostip;
 private:
     int communicate();
-    static string clientname;
-    static string clientip;
-    static int clientport;
-    static string hostip;
 };
