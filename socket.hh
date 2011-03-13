@@ -1,21 +1,19 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <string>
-
+#define MTU 1500
 using namespace std;
 
 class Socket {
 public:
     Socket();
-    Socket(int port);
-    string name;
-    string ip;
-    int port;
+    Socket(int srcport);
+    Socket(int srcport, int af, string connectto, int destport);
 
     static string hostname(){
-        char name[255];
-        gethostname(name,255);
-        return string(name);
+        char hname[255];
+        gethostname(hname,255);
+        return string(hname);
     }
 
     static string ipofhost(string name){
@@ -25,5 +23,21 @@ public:
                             (host->h_addr_list[0])),
                   ip, INET_ADDRSTRLEN);
         return string(ip);
-    }    
+    }
+
+    string getsrcname() const;
+    string getsrcip() const;
+    string getdestip() const;
+    int getsrcport() const;
+    int getdestport() const;
+    
+
+private:
+    void setdest(int af, string connectto, int destport);
+    void setip();
+    void init();
+    struct sockaddr_in sin;
+    string name;
+    string ip;
+    int srcport;
 };

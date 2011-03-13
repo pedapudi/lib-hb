@@ -5,8 +5,13 @@
 HBClient::HBClient(){
 }
 
-HBClient::HBClient(string hip, int cport){
+HBClient::HBClient(int cport){
     sock = Socket(cport);
+    HBClient();
+}
+
+HBClient::HBClient(int cport, string hip, int hport){
+    sock = Socket(cport, AF_INET, hip, hport);
     hostip = hip;
     HBClient();
 }
@@ -15,26 +20,27 @@ int HBClient::communicate(){
 }
 
 /* Accessor methods */
-string HBClient::server() const{
-    return string(hostip);
-}
-
 string HBClient::cname() const{
-    return string(sock.name);
+    return sock.getsrcname();
 }
 
 int HBClient::cport() const{
-    return sock.port;
+    return sock.getsrcport();
 }
 
-string HBClient::cip() const{
-    return string(sock.ip);
+string HBClient::client() const{
+    return sock.getsrcip();
+}
+
+string HBClient::host() const{
+    return sock.getdestip();
 }
 
 int main(){
-    HBClient c("127.0.0.1", 5070);
+    HBClient c(7050, "127.0.0.1", 5070);
     cout << "client name: " << c.cname() << endl;
     cout << "client-side port: " << c.cport() << endl;
-    cout << "client IP: " << c.cip() << endl;
+    cout << "client IP: " << c.client() << endl;
+    cout << "host IP: " << c.host() << endl;
     return 0;
 }
