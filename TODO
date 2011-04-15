@@ -1,2 +1,7 @@
 ** move network operations (connect, bind, listen, etc.) to its own class
 ** abstract server.cc's bind method and don't use direct c calls
+** sockset_isreadable and sockset_iswriteable might be broken because
+   the assumption was that sset's value will be pair<Socket, Socket> and
+   pair.first or pair.second will be NULL if the Socket is not
+   readable/writeable respectively. the latter convention may not be working...
+
