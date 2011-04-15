@@ -8,11 +8,9 @@ using namespace std;
 class HBClient {
 public:
     HBClient();
-    HBClient(int cport);
-    HBClient(int cport, string hip, int hport);
+    HBClient(string hip, int hport);
 
     string cname() const;
-    int cport() const;
     string client() const;
     string host() const;
 
@@ -21,5 +19,5 @@ protected:
     string hostip;
 
 private:
-    int communicate();
+    
 };
