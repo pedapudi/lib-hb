@@ -1,0 +1,2 @@
+** move network operations (connect, bind, listen, etc.) to its own class
+** abstract server.cc's bind method and don't use direct c calls
