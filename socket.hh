@@ -61,7 +61,7 @@ public:
     fd_set sockset_as_fd_set();
 
     fd_set getrfdset() const;
-    fd_set getwdfset() const;
+    fd_set getwfdset() const;
 
 protected:
     pair<Socket, Socket> make_pair(Socket sock, bool r, bool w);

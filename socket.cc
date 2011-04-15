@@ -104,33 +104,27 @@ void SockSet::sockset_add(Socket sock) {
 
 bool SockSet::sockset_isreadable(Socket sock) {
     pair<Socket, Socket> sockpair;
-    if(sset.find(sock.getfd() == sset.end())) {
-	sockpair = NULL;
-    } else {
+    if(sset.find(sock.getfd()) != sset.end()) {
 	sockpair = sset[sock.getfd()];
     }
     
-    if(sockpair != NULL) {
-	if(sockpair.first != NULL) {
-	    return FD_ISSET(sockpair.first.getfd(), &rfdset);
-	}
+    if(sockpair.first.getfd() > 0) {
+	return FD_ISSET(sockpair.first.getfd(), &rfdset);
     }
+
     return false;
 }
 
 bool SockSet::sockset_iswriteable(Socket sock) {
     pair<Socket, Socket> sockpair;
-    if(sset.find(sock.getfd() == sset.end())) {
-	sockpair = NULL;
-    } else {
+    if(sset.find(sock.getfd()) != sset.end()) {
 	sockpair = sset[sock.getfd()];
     }
     
-    if(sockpair != NULL) {
-	if(sockpair.second != NULL) {
-	    return FD_ISSET(sockpair.second.getfd(), &wfdset);
-	}
+    if(sockpair.second.getfd() > 0) {
+	return FD_ISSET(sockpair.second.getfd(), &wfdset);
     }
+
     return false;
 }
 

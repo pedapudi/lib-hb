@@ -16,7 +16,7 @@ int HBServer::listensin() {
 }
 
 int HBServer::acceptconn() {
-    struct sockaddr_in client_sin;
+    /*    struct sockaddr_in client_sin;
     int addr_len = sizeof(client_sin);
     int listening_fd = sock.getfd();
     while(1) {
@@ -42,7 +42,8 @@ int HBServer::acceptconn() {
 		      client_sock :
 		      max_fd);
 	}
-    }
+	}*/
+    return 0;
 }
 
 int main() {
